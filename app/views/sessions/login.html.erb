@@ -1,0 +1,16 @@
+<% @page_title = "Login" -%>
+<div >
+	<h1>Log in</h1>
+	<%= form_tag(:action => 'login_attempt') do %>
+		<p>
+		Email:</br> <%= text_field_tag(:email) %>
+		</p> 
+
+		<p>
+		Password:</br> <%= password_field_tag :login_password %>
+		</p> 
+
+		<%= submit_tag("Log In") %>
+	<% end %>
+</div>
+<p>Or <%= link_to "Register for a  New Account", signup_path%></p>
