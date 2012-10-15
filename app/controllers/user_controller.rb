@@ -21,5 +21,9 @@ class UserController < ApplicationController
     
   end
   
+  def tos
+    
+  end
+  
 
 end

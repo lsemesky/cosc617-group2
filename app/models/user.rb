@@ -8,10 +8,11 @@ class User < ActiveRecord::Base
   validates :name, :presence => true
   validates :email, :presence => true, :uniqueness => true, :format => EMAIL_REGEX
   validates :password, :confirmation => true
+  validates_acceptance_of :tos
   #Only on Create so other actions like update password attribute can be nil
   validates_length_of :password, :in => 6..20, :on => :create
   
-  attr_accessible :name, :email, :password, :password_confirmation
+  attr_accessible :name, :email, :password, :password_confirmation, :tos
   
  def self.authenticate(email="", login_password="")
 
