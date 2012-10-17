@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121017104330) do
+ActiveRecord::Schema.define(:version => 20121017111358) do
 
   create_table "animal_types", :force => true do |t|
     t.string   "species"

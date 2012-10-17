@@ -1,4 +1,4 @@
 class AnimalType < ActiveRecord::Base
-  attr_accessible :animal_type
+  attr_accessible :species
   has_many :animals
 end
