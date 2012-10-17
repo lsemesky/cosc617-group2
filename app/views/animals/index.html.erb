@@ -1,0 +1,31 @@
+<h1>Animals#index</h1>
+<table>
+<% @animals.each do |animal| %>
+  <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+
+
+    <td class="list_description">
+      <dl>
+        <dt><%= animal.name %></dt>
+      </dl>
+    </td>
+    
+    <td>
+    	<dl>
+    		<dt><%= animal.animal_type.species %></dt>
+    	</dl>
+    </td>
+
+    <td class="list_actions">
+      <%= link_to 'Show', animal %><br/>
+      <%= link_to 'Edit', edit_animal_path(animal) %><br/>
+      <%= link_to 'Destroy', animal, method: :delete,
+                  data: { confirm: 'Are you sure?' } %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New animal', new_animal_path %>

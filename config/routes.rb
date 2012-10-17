@@ -1,7 +1,13 @@
 AssociationOfZoo::Application.routes.draw do
+ 
   
+
+  resources :animals
+
+
 root :to => "sessions#login"
 
+#match "animals", :to => "animals#index"
 match "signup", :to => "user#register"
 match "login", :to => "sessions#login"
 match "logout", :to => "sessions#logout"

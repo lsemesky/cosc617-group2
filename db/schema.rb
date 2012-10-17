@@ -11,7 +11,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121014180859) do
+ActiveRecord::Schema.define(:version => 20121017104330) do
+
+  create_table "animal_types", :force => true do |t|
+    t.string   "species"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "animals", :force => true do |t|
+    t.integer  "zoo_id"
+    t.string   "name"
+    t.string   "gender"
+    t.string   "breeding_status"
+    t.date     "dob"
+    t.string   "ancestry"
+    t.text     "comments"
+    t.integer  "animal_type_id",  :limit => 255
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
+
+  add_index "animals", ["ancestry"], :name => "index_animals_on_ancestry"
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false

@@ -24,7 +24,6 @@ gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
  gem 'bcrypt-ruby', :require => 'bcrypt' 
- gem 'pg'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
@@ -37,3 +36,7 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
+
+ gem 'pg'
+ gem 'ancestry'
+ gem 'carrierwave'

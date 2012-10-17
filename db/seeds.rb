@@ -6,14 +6,4 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Address.create(:name => "Sherlock",
-  :address => '221B Baker Street',
-  :phone => '745-4343',
-  :email => 'sherlock@gmail.com'
-)
-
-Address.create(:name => "Jill",
-  :address => 'Up the hill',
-  :phone => '645-6364',
-  :email => 'jill@aol.com'
-)
+AnimalType.create([{animal_type: 'Lion'},{animal_type: 'Panda'},{animal_type: 'Koala'}])

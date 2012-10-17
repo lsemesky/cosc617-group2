@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  zoo_id: 
+  name: MyString
+  gender: MyString
+  breeding_status: MyString
+  dob: 2012-10-17
+  ancestry: MyString
+  comments: MyText
+  species: MyString
+
+two:
+  zoo_id: 
+  name: MyString
+  gender: MyString
+  breeding_status: MyString
+  dob: 2012-10-17
+  ancestry: MyString
+  comments: MyText
+  species: MyString

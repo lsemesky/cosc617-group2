@@ -1,0 +1,50 @@
+<%= form_for(@animal) do |f| %>
+  <% if @animal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@animal.errors.count, "error") %>
+      prohibited this animal from being saved:</h2>
+
+      <ul>
+      <% @animal.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :species %><br />
+    <%= collection_select(:animal, :animal_type_id, AnimalType.all, :id, :species, :prompt => false) %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br />
+<!-- START_HIGHLIGHT -->
+    <%= f.text_field :name %>
+<!-- END_HIGHLIGHT -->
+  </div>
+  <div class="field">
+    <%= f.label :gender %><br />
+    <%= f.radio_button :gender, "male" %>
+    <%= label_tag(:gender_male, "male") %>
+    <%= f.radio_button :gender, "female" %>
+    <%= label_tag(:gender_female, "female") %>
+  </div>
+  <div class="field">
+  	Date of Birth: <%= f.date_select :dob, :start_year => Time.now.year - 100, :end_year => Time.now.year %>
+  </div>
+  <div class="field">
+  	<%= f.label :breeding_status %>
+  	<%= f.select(:breeding_status, options_for_select([["Viable","viable"],["Pregnant","pregnant"],["Steralized","steralized"],["Unviable","unviable"]])) %>
+  </div>
+    <div class="field">
+    <%= f.label :comments %><br />
+    <%= f.text_area :comments, :rows => 4 %>
+  </div>
+
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+  
+<% end %>
+

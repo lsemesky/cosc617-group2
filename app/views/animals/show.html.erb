@@ -1,0 +1,34 @@
+<h1>Animal Profile</h1>
+
+<p>
+  <b>Species:</b>
+  <%= @animal.animal_type.species %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @animal.name %>
+</p>
+<p>
+  <b>Gender:</b>
+  <%= @animal.gender %>
+</p>
+
+<p>
+  <b>Date of Birth:</b>
+  <%= @animal.dob %>
+</p>
+
+<p>
+  <b>Breeding Status:</b>
+  <%= @animal.breeding_status %>
+</p>
+
+<p>
+  <b>Comments:</b>
+  <%= @animal.comments %>
+</p>
+
+
+<%= link_to 'Edit', edit_animal_path(@animal) %> |
+<%= link_to 'Back', animals_path %>
