@@ -1,5 +1,6 @@
 class AnimalsController < ApplicationController
  def index
+   #this is the index method
     @animals = Animal.all
 
     respond_to do |format|
