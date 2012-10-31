@@ -1,22 +1,30 @@
-<h1>Animals#index</h1>
+<h1>List of Animals</h1>
+<% @species.each do |s| %>
 <table>
-<% @animals.each do |animal| %>
-  <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+<caption><h2><%= s.species.pluralize %></h2></caption>
+<tr><th>Animal ID</th>
+	<th>Animal Name</th>
+	<th>Gender</th>
+	<th>Breeding Status</th>
+	<th></th>
+</tr>
+<% s.animals.each do |animal| %>
 
-
-    <td class="list_description">
-      <dl>
-        <dt><%= animal.name %></dt>
-      </dl>
-    </td>
-    
+  <tr>
+	<td>
+		<%= animal.id %>
+	</td>
     <td>
-    	<dl>
-    		<dt><%= animal.animal_type.species %></dt>
-    	</dl>
+        <%= animal.name %>
+    </td>
+        <td>
+        <%= animal.gender %>
+    </td>
+    <td>
+        <%= animal.breeding_status %>
     </td>
 
-    <td class="list_actions">
+    <td>
       <%= link_to 'Show', animal %><br/>
       <%= link_to 'Edit', edit_animal_path(animal) %><br/>
       <%= link_to 'Destroy', animal, method: :delete,
@@ -27,5 +35,5 @@
 </table>
 
 <br />
-
+<% end%>
 <%= link_to 'New animal', new_animal_path %>

@@ -1,6 +1,7 @@
 class AnimalsController < ApplicationController
  def index
-    @animals = Animal.all
+    #@animals = Animal.all
+    @species = AnimalType.find(:all, :include => :animals)
 
     respond_to do |format|
       format.html # index.html.erb
