@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
-  attr_accessor :password
+
+  attr_accessible :name, :email, :password, :password_confirmation, :tos, :address, :phone, :dob, :gender, :location, :website
+  
   
   before_save :encrypt_password
   after_save :clear_password
@@ -11,8 +13,8 @@ class User < ActiveRecord::Base
   validates_acceptance_of :tos
   #Only on Create so other actions like update password attribute can be nil
   validates_length_of :password, :in => 6..20, :on => :create
+  attr_accessor :password #this means it doesn't get saved in the database
   
-  attr_accessible :name, :email, :password, :password_confirmation, :tos
   
  def self.authenticate(email="", login_password="")
 
