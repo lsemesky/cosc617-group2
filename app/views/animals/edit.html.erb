@@ -2,5 +2,5 @@
 <p>Find me in app/views/animals/edit.html.erb</p>
 <%= render 'form' %>
 
-<%= link_to 'Show', @animal %> |
-<%= link_to 'Back', animals_path %>
+<%= link_to 'Show', zoo_animal_path %> |
+<%= link_to 'Back', zoo_animal_path(params[:zoo_id], '') %>

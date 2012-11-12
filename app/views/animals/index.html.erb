@@ -1,25 +1,33 @@
-<h1>Animals#index</h1>
+<h1>List of Animals</h1>
+<% @species.sort.each do |type, animals| %>
 <table>
-<% @animals.each do |animal| %>
-  <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+<caption><h1><%= type %></h1></caption>
+<tr><th>Animal ID</th>
+	<th>Animal Name</th>
+	<th>Gender</th>
+	<th>Breeding Status</th>
+	<th></th>
+</tr>
 
-
-    <td class="list_description">
-      <dl>
-        <dt><%= animal.name %></dt>
-      </dl>
-    </td>
-    
+<% for animal in animals %>
+  <tr>
+	<td>
+		<%= animal.id %>
+	</td>
     <td>
-    	<dl>
-    		<dt><%= animal.animal_type.species %></dt>
-    	</dl>
+        <%= animal.name %>
+    </td>
+        <td>
+        <%= animal.gender %>
+    </td>
+    <td>
+        <%= animal.breeding_status %>
     </td>
 
-    <td class="list_actions">
-      <%= link_to 'Show', animal %><br/>
-      <%= link_to 'Edit', edit_animal_path(animal) %><br/>
-      <%= link_to 'Destroy', animal, method: :delete,
+    <td>
+      <%= link_to 'Show', zoo_animal_url(animal.zoo_id, animal.id) %><br/>
+      <%= link_to 'Edit', edit_zoo_animal_path(animal.zoo_id, animal.id) %><br/>
+      <%= link_to 'Destroy', zoo_animal_url(animal.zoo_id, animal.id), method: :delete,
                   data: { confirm: 'Are you sure?' } %>
     </td>
   </tr>
@@ -27,5 +35,5 @@
 </table>
 
 <br />
-
-<%= link_to 'New animal', new_animal_path %>
+<% end%>
+<%= link_to 'New animal', new_zoo_animal_path(params[:zoo_id]) %>

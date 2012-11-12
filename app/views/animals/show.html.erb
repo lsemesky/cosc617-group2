@@ -2,7 +2,7 @@
 
 <p>
   <b>Species:</b>
-  <%= @animal.animal_type.species %>
+  <%= @animal.animal_type %>
 </p>
 
 <p>
@@ -30,5 +30,5 @@
 </p>
 
 
-<%= link_to 'Edit', edit_animal_path(@animal) %> |
-<%= link_to 'Back', animals_path %>
+<%= link_to 'Edit', edit_zoo_animal_path %> |
+<%= link_to 'Back', zoo_animal_path(params[:zoo_id], '') %>

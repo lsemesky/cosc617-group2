@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121031035338) do
+ActiveRecord::Schema.define(:version => 20121112064843) do
 
   create_table "animal_types", :force => true do |t|
     t.string   "species"
@@ -27,25 +27,12 @@ ActiveRecord::Schema.define(:version => 20121031035338) do
     t.date     "dob"
     t.string   "ancestry"
     t.text     "comments"
-    t.integer  "animal_type_id",  :limit => 255
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "animal_type"
   end
 
   add_index "animals", ["ancestry"], :name => "index_animals_on_ancestry"
-
-  create_table "profiles", :force => true do |t|
-    t.text     "name"
-    t.text     "address"
-    t.text     "phone"
-    t.text     "email"
-    t.text     "dob"
-    t.text     "gender"
-    t.text     "location"
-    t.text     "website"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
@@ -56,19 +43,6 @@ ActiveRecord::Schema.define(:version => 20121031035338) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
-
-  create_table "user_profiles", :force => true do |t|
-    t.text     "name"
-    t.text     "address"
-    t.text     "phone"
-    t.text     "email"
-    t.text     "dob"
-    t.text     "gender"
-    t.text     "location"
-    t.text     "website"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
 
   create_table "users", :force => true do |t|
     t.string   "name"

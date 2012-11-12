@@ -3,6 +3,10 @@ AssociationOfZoo::Application.routes.draw do
   resources :animals
   resources :users#, :has_one => :profile, :controller => 'user'
   resources :zoos
+  
+  resources :zoos do
+    resources :animals
+  end
 
 root :to => "sessions#login"
 

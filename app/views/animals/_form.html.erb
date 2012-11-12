@@ -1,4 +1,4 @@
-<%= form_for(@animal) do |f| %>
+<%= form_for([@zoo, @animal]) do |f| %>
   <% if @animal.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@animal.errors.count, "error") %>
@@ -13,8 +13,8 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :species %><br />
-    <%= collection_select(:animal, :animal_type_id, AnimalType.all, :id, :species, :prompt => false) %>
+    <%= f.label :animal_type %><br />
+    <%= select(:animal, :animal_type, @species, :prompt => false) %>
   </div>
   <div class="field">
     <%= f.label :name %><br />

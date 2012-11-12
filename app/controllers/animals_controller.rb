@@ -1,7 +1,11 @@
 class AnimalsController < ApplicationController
  def index
-   #this is the index method
-    @animals = Animal.all
+
+   
+   
+    @animals = Animal.where(:zoo_id => params[:zoo_id])   #this is the index method
+    @species = @animals.group_by {|animal| animal.animal_type}
+
 
     respond_to do |format|
       format.html # index.html.erb
@@ -24,6 +28,8 @@ class AnimalsController < ApplicationController
   # GET /animals/new.json
   def new
     @animal = Animal.new
+    @zoo = Zoo.find(params[:zoo_id])
+     @species = ['Lion', 'Koala', 'Panda']
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,16 +40,21 @@ class AnimalsController < ApplicationController
   # GET /animals/1/edit
   def edit
     @animal = Animal.find(params[:id])
+    @zoo = Zoo.find(params[:zoo_id])
+    @species = ['Lion', 'Koala', 'Panda']
   end
 
   # POST /animals
   # POST /animals.json
   def create
     @animal = Animal.new(params[:animal])
+    @species = ['Lion', 'Koala', 'Panda']
+    @zoo = Zoo.find(params[:zoo_id])
+    @animal.zoo_id = params[:zoo_id];
 
     respond_to do |format|
       if @animal.save
-        format.html { redirect_to @animal,
+        format.html { redirect_to zoo_animal_path(params[:zoo_id],@animal.id),
           notice: 'animal was successfully created.' }
         format.json { render json: @animal, status: :created,
           location: @animal }
@@ -59,10 +70,12 @@ class AnimalsController < ApplicationController
   # PUT /animals/1.json
   def update
     @animal = Animal.find(params[:id])
+    @species = ['Lion', 'Koala', 'Panda']
+    @zoo = Zoo.find(params[:zoo_id])
 
     respond_to do |format|
       if @animal.update_attributes(params[:animal])
-        format.html { redirect_to @animal,
+        format.html { redirect_to zoo_animal_path(params[:zoo_id],@animal.id),
           notice: 'animal was successfully updated.' }
         format.json { head :no_content }
       else
@@ -80,12 +93,8 @@ class AnimalsController < ApplicationController
     @animal.destroy
 
     respond_to do |format|
-      format.html { redirect_to animals_url }
+      format.html { redirect_to zoo_animals_url }
       format.json { head :no_content }
     end
-  end
-  
-  def set_child
-    @animal = Animal.find(params[:id])
   end
 end
