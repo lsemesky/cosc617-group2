@@ -37,6 +37,6 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'debugger'
 
- gem 'pg'
+ # gem 'pg'
  gem 'ancestry'
  gem 'carrierwave'

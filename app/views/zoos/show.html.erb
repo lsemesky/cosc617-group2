@@ -1,0 +1,42 @@
+<h1>Zoo Information</h1>
+
+
+<p>
+  <b>Zoo Name:</b>
+  <%= @zoo.name %>
+</p>
+
+<p>
+  <b>Belongs:</b>
+  <%= @zoo.belongs %>
+</p>
+
+<p>
+  <b>Established Date:</b>
+  <%= @zoo.ed %>
+</p>
+
+  <p>
+    <b>Location Address:</b>
+    <%=@zoo.address%>
+  </p>
+
+  <p>
+    <b>Contact Phone:</b>
+    <%=@zoo.phone%>
+  </p>
+
+  <p>
+    <b>Email Address:</b>
+    <%=@zoo.email%>
+  </p>
+
+
+<p>
+  <b>Zoo Introduction Remark:</b>
+  <%= @zoo.remarks%>
+</p>
+
+
+<%= link_to 'Edit', edit_zoo_path(@zoo) %> |
+<%= link_to 'Back', zoos_path %>

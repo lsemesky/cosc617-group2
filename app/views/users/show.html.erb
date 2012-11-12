@@ -1,0 +1,40 @@
+<h1><%=@user.name%>'s Profile</h1>
+<p>Find me in app/views/sessions/profile.html.erb</p>
+
+  <p>
+    <b>Address:</b>
+    <%=@user.address%>
+  </p>
+
+  <p>
+    <b>Phone:</b>
+    <%=@user.phone%>
+  </p>
+
+  <p>
+    <b>Email:</b>
+    <%=@user.email%>
+  </p>
+
+  <p>
+    <b>Date of Birth:</b>
+    <%=@user.dob%>
+  </p>
+
+  <p>
+    <b>Gender:</b>
+    <%=@user.gender%>
+  </p>
+
+  <p>
+    <b>Location:</b>
+    <%=@user.location%>
+  </p>
+
+  <p>
+    <b>Website:</b>
+    <%=@user.website%>
+  </p>
+  
+<%= link_to 'Edit', edit_user_path(@user) %> 
+<%= link_to 'Back', home_path %>

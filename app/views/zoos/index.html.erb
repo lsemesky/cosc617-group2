@@ -1,0 +1,44 @@
+<h1>Zoos#index</h1>
+<table>
+<% @zoos.each do |zoo| %>
+  <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+
+
+    <td class="list_description">
+      <dl>
+        <dt><%= zoo.name %></dt>
+      </dl>
+    </td>
+    
+    <td>
+    	<dl>
+    		<dt><%= zoo.belongs %></dt>
+    	</dl>
+    </td>
+    
+    <td>
+    	<dl>
+    		<dt><%= zoo.address %></dt>
+    	</dl>
+    </td>
+    
+    <td>
+    	<dl>
+    		<dt><%= zoo.phone %></dt>
+    	</dl>
+    </td>
+
+    <td class="list_actions">
+      <%= link_to 'Display', zoo %>
+      <%= link_to 'Edit', edit_zoo_path(zoo) %>
+      <%= link_to 'Delete', zoo, method: :delete,
+                  data: { confirm: 'Are you sure?' } %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New zoo page', new_zoo_path %>
+<%= link_to 'Back', home_path %>

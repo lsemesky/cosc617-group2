@@ -1,37 +1,41 @@
 AssociationOfZoo::Application.routes.draw do
- 
-  
 
   resources :animals
-
+  resources :users#, :has_one => :profile, :controller => 'user'
+  resources :zoos
 
 root :to => "sessions#login"
 
 #match "animals", :to => "animals#index"
-match "signup", :to => "user#register"
+match "signup", :to => "users#register"
 match "login", :to => "sessions#login"
 match "logout", :to => "sessions#logout"
 match "home", :to => "sessions#home"
-match "profile", :to => "sessions#profile"
+match "profile", :to => "users#edit"
 match "setting", :to => "sessions#setting"
-match "tos", :to => "user#tos"
+match "tos", :to => "users#tos"
 
   get "sessions/login"
 
   get "sessions/home"
+  
+  post "sessions/home"
 
   get "sessions/profile"
 
   get "sessions/setting"
   
+  get "sessions/new"
+  
+  get "sessions/edit"
+  
   post "sessions/login_attempt"
 
-  get "user/register"
+  get "users/register"
 
-  get "user/add"
+  get "users/add"
   
-  post "user/add"
-  
+  post "users/add"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -5,8 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-
 User.create(name: 'a', email: 'a@a.com', password: 'aaaaaa')
+
 AnimalType.create([{ species: 'Lion' }, { species: 'Panda' },{species: 'Koala'}])
 Animal.create([
   #lions
@@ -23,4 +23,3 @@ Animal.create([
   {breeding_status: 'sterilized', comments: '', dob: '2007-02-11', gender: 'female', name: 'Lowanna', animal_type_id: 3, zoo_id: 1},
   {breeding_status: 'viable', comments: '', dob: '2009-09-05', gender: 'male', name: 'Mandu', animal_type_id: 3, zoo_id: 1}
 ])
-
