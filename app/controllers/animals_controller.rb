@@ -88,4 +88,8 @@ class AnimalsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def set_child
+    @animal = Animal.find(params[:id])
+  end
 end
