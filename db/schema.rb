@@ -90,6 +90,10 @@ ActiveRecord::Schema.define(:version => 20121031035338) do
     t.string   "address"
     t.string   "email"
     t.string   "phone"
+    t.integer  "animal_id"
+    t.string   "belongs"
+    t.date     "ed"
+    t.text     "remarks"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

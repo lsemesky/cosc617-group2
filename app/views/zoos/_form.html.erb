@@ -1,0 +1,61 @@
+<%= form_for(@zoo) do |f| %>
+
+  <% if @zoo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@zoo.errors.count, "error") %>
+      prohibited this zoo information from being saved:</h2>
+
+      <ul>
+      <% @zoo.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :belongs %><br />
+    <%= f.radio_button :belongs, "Nationalized" %>
+    <%= label_tag(:belongs_state, "Nationalized") %>
+    <%= f.radio_button :belongs, "Region-owned" %>
+    <%= label_tag(:belongs_region, "Region-owned") %>
+    <%= f.radio_button :belongs, "Privated" %>
+    <%= label_tag(:belongs_private, "Privated") %>
+  </div>
+  
+  <div class="field">
+  	Established Date: <%= f.date_select :ed, :start_year => Time.now.year - 100, :end_year => Time.now.year %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :address %><br />
+    <%= f.text_field :address %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :phone %><br />
+    <%= f.text_field :phone %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :remarks %><br />
+    <%= f.text_area :remarks, :rows => 5 %>
+  </div>
+
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+  
+<% end %>
+

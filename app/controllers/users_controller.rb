@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_filter :save_login_state, :only => [:register, :add]
 
   def register
-    @user = User.new
+    @user = User.new(params[:user])
   end
 
   def add
@@ -43,7 +43,7 @@ class UsersController < ApplicationController
     @user = User.find session[:user_id] 
     
     respond_to do |format|
-      if @user.update_attributes(params[:user])
+      if @user.update_attributes(params[:user_id])
         format.html { redirect_to @user,
           notice: 'user profile was successfully updated.' }
         format.json { head :no_content }

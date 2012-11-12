@@ -5,6 +5,10 @@ class CreateZoos < ActiveRecord::Migration
       t.string :address
       t.string :email
       t.string :phone
+      t.integer :animal_id
+      t.string :belongs
+      t.date :ed
+      t.text :remarks
 
       t.timestamps
     end

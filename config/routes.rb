@@ -2,6 +2,7 @@ AssociationOfZoo::Application.routes.draw do
 
   resources :animals
   resources :users#, :has_one => :profile, :controller => 'user'
+  resources :zoos
 
 root :to => "sessions#login"
 
@@ -17,6 +18,8 @@ match "tos", :to => "users#tos"
   get "sessions/login"
 
   get "sessions/home"
+  
+  post "sessions/home"
 
   get "sessions/profile"
 
