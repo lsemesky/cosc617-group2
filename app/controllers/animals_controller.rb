@@ -1,10 +1,9 @@
 class AnimalsController < ApplicationController
  def index
 
-   
-   
     @animals = Animal.where(:zoo_id => params[:zoo_id])   #this is the index method
     @species = @animals.group_by {|animal| animal.animal_type}
+    @zoo = Zoo.find(params[:zoo_id])
 
 
     respond_to do |format|
@@ -17,6 +16,7 @@ class AnimalsController < ApplicationController
   # GET /animals/1.json
   def show
     @animal = Animal.find(params[:id])
+    @zoo = Zoo.find(params[:zoo_id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -74,6 +74,7 @@ class AnimalsController < ApplicationController
     @zoo = Zoo.find(params[:zoo_id])
 
     respond_to do |format|
+ 
       if @animal.update_attributes(params[:animal])
         format.html { redirect_to zoo_animal_path(params[:zoo_id],@animal.id),
           notice: 'animal was successfully updated.' }
@@ -97,4 +98,6 @@ class AnimalsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+
 end
