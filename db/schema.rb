@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121113090046) do
+ActiveRecord::Schema.define(:version => 20121113202758) do
 
   create_table "animal_types", :force => true do |t|
     t.string   "species"
@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(:version => 20121113090046) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.string   "animal_type"
+    t.integer  "father_id"
+    t.integer  "mother_id"
   end
 
   add_index "animals", ["ancestry"], :name => "index_animals_on_ancestry"

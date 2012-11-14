@@ -17,6 +17,9 @@ class AnimalsController < ApplicationController
   def show
     @animal = Animal.find(params[:id])
     @zoo = Zoo.find(params[:zoo_id])
+    @father = Animal.find(6)
+    @mother = @animal.mother
+    
 
     respond_to do |format|
       format.html # show.html.erb
@@ -53,6 +56,8 @@ class AnimalsController < ApplicationController
     @animal.zoo_id = params[:zoo_id];
 
     respond_to do |format|
+   #    @animal.father = Animal.find(params[:father_id])
+  #@animal.mother = Animal.find(params[:mother_id])
       if @animal.save
         format.html { redirect_to zoo_animal_path(params[:zoo_id],@animal.id),
           notice: 'animal was successfully created.' }
@@ -74,13 +79,22 @@ class AnimalsController < ApplicationController
     @zoo = Zoo.find(params[:zoo_id])
 
     respond_to do |format|
- 
-      if @animal.update_attributes(params[:animal])
+      
+ #@animal.mother = Animal.find(params[:animal][:mother_id])
+
+#  @animal.father = Animal.find(params[:animal][:father_id])
+
+if @animal.update_attributes(params[:animal])
+         #if @animal.has_valid_parents && 
         format.html { redirect_to zoo_animal_path(params[:zoo_id],@animal.id),
           notice: 'animal was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        if !@animal.has_valid_parents
+        flash[:notice] =  "Parent species or gender mismatch"
+            flash[:color]= "invalid"
+          end
+        format.html { render action: "edit"}
         format.json { render json: @animal.errors,
           status: :unprocessable_entity }
       end

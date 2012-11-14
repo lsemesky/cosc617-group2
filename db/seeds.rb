@@ -21,8 +21,8 @@ Animal.create([
   #lions
   {breeding_status: 'viable', comments: 'good', dob: '2009-09-01', gender: 'female', name: 'Nala', animal_type: 'Lion', zoo_id: 3},
   {breeding_status: 'viable', comments: 'playful', dob: '2009-09-03', gender: 'male', name: 'Simba', animal_type: 'Lion', zoo_id: 2},
-  {breeding_status: 'unviable', comments: 'unhealthy', dob: '2004-09-03', gender: 'male', name: 'Mufasa', animal_type: 'Lion', zoo_id: 1},
-  {breeding_status: 'pregnant', comments: 'due december 2012', dob: '2009-12-03', gender: 'female', name: 'Leona', animal_type: 'Lion', zoo_id: 3},
+  {breeding_status: 'unviable', comments: 'unhealthy', dob: '2004-09-03', gender: 'male', name: 'Mufasa', animal_type: 'Lion', zoo_id: 1, father_id: 2, mother_id: 1},
+  {breeding_status: 'pregnant', comments: 'due december 2012', dob: '2009-12-03', gender: 'female', name: 'Leona', animal_type: 'Lion', zoo_id: 3, father_id: 2, mother_id: 1},
   #pandas
   {breeding_status: 'viable', comments: '', dob: '2006-01-21', gender: 'female', name: 'Hua Mei', animal_type: 'Panda', zoo_id: 3},
   {breeding_status: 'viable', comments: '', dob: '2007-02-11', gender: 'male', name: 'Mei Sheng', animal_type: 'Panda', zoo_id: 1},

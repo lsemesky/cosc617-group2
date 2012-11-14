@@ -36,6 +36,14 @@
   	<%= f.label :breeding_status %>
   	<%= f.select(:breeding_status, options_for_select([["Viable","viable"],["Pregnant","pregnant"],["Sterilized","sterilized"],["Unviable","unviable"]])) %>
   </div>
+  <div class ="field">
+  	<%= f.label :mother_id %>
+  	<%= f.text_field :mother_id %>
+  </div>
+    <div class ="field">
+  	<%= f.label :father_id %>
+  	<%= f.text_field :father_id %>
+  </div>
     <div class="field">
     <%= f.label :comments %><br />
     <%= f.text_area :comments, :rows => 4 %>
