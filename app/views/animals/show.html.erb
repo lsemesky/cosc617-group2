@@ -28,28 +28,35 @@
   <b>Comments:</b>
   <%= @animal.comments %>
 </p>
+
 <p><b>Mother</b>
-	<% if @animal.mother != nil%>
-	<%= link_to @animal.mother.name, zoo_animal_path(@animal.mother.zoo_id, @animal.mother.id) %>
-	<% end%>
+	<% if @mother != nil %>
+		<%= link_to @mother.name, zoo_animal_path(@mother.zoo_id, @mother.id) %>
+	<% else%>
+		Unknown
+	<%end%>
 </p>
+
 <p><b>Father</b>
-	<% if @animal.father != nil%>
-	<%= link_to @animal.father.name, zoo_animal_path(@animal.father.zoo_id, @animal.father.id) %>
-	<% end%>
+	<% if @father != nil %>
+		<%= link_to @father.name, zoo_animal_path(@father.zoo_id, @father.id) %>
+	<% else%>
+		Unknown
+	<%end%>
 </p>
+
 <p><b>Children</b>
-	<% if @animal.mothered_children != nil%>
-	<% @animal.mothered_children.each do |child| %>
-	<%= link_to child.name, zoo_animal_path(child.zoo_id, child.id) %>
-	<% end%>
-	<% end%>
-		<% if @animal.fathered_children != nil%>
-	<% @animal.fathered_children.each do |child| %>
-	<%= link_to child.name, zoo_animal_path(child.zoo_id, child.id) %>
-	<% end%>
+	<% @children.each do |child| %>
+		<%= link_to child.name, zoo_animal_path(child.zoo_id, child.id) %>
 	<% end%>
 </p>
+
+<p><b>Siblings</b>
+	<% @siblings.each do |sibling| %>
+		<%= link_to sibling.name, zoo_animal_path(sibling.zoo_id, sibling.id) %>
+	<% end%>
+</p>
+
 
 
 <%= link_to 'Edit', edit_zoo_animal_path %> |
