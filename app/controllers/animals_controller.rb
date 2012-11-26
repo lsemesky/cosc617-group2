@@ -16,9 +16,12 @@ class AnimalsController < ApplicationController
   # GET /animals/1.json
   def show
     @animal = Animal.find(params[:id])
+    
     @zoo = Zoo.find(params[:zoo_id])
-    @father = Animal.find(6)
+    @father = @animal.father
     @mother = @animal.mother
+    @children = @animal.children
+    @siblings = @animal.siblings
     
 
     respond_to do |format|
@@ -54,10 +57,10 @@ class AnimalsController < ApplicationController
     @species = ['Lion', 'Koala', 'Panda']
     @zoo = Zoo.find(params[:zoo_id])
     @animal.zoo_id = params[:zoo_id];
+    
 
     respond_to do |format|
-   #    @animal.father = Animal.find(params[:father_id])
-  #@animal.mother = Animal.find(params[:mother_id])
+
       if @animal.save
         format.html { redirect_to zoo_animal_path(params[:zoo_id],@animal.id),
           notice: 'animal was successfully created.' }
@@ -79,26 +82,18 @@ class AnimalsController < ApplicationController
     @zoo = Zoo.find(params[:zoo_id])
 
     respond_to do |format|
-      
- #@animal.mother = Animal.find(params[:animal][:mother_id])
 
-#  @animal.father = Animal.find(params[:animal][:father_id])
-
-if @animal.update_attributes(params[:animal])
-         #if @animal.has_valid_parents && 
+    if @animal.update_attributes(params[:animal])
         format.html { redirect_to zoo_animal_path(params[:zoo_id],@animal.id),
           notice: 'animal was successfully updated.' }
         format.json { head :no_content }
-      else
-        if !@animal.has_valid_parents
-        flash[:notice] =  "Parent species or gender mismatch"
-            flash[:color]= "invalid"
-          end
+    else
+
         format.html { render action: "edit"}
         format.json { render json: @animal.errors,
           status: :unprocessable_entity }
-      end
     end
+   end
   end
 
   # DELETE /animals/1
