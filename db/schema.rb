@@ -11,13 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121113202758) do
+ActiveRecord::Schema.define(:version => 20121126005545) do
 
-  create_table "animal_types", :force => true do |t|
-    t.string   "species"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
 
   create_table "animals", :force => true do |t|
     t.integer  "zoo_id"
@@ -29,12 +24,14 @@ ActiveRecord::Schema.define(:version => 20121113202758) do
     t.text     "comments"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
-    t.string   "animal_type"
-    t.integer  "father_id"
-    t.integer  "mother_id"
+    t.integer   "mother_id"
+    t.integer "father_id"
+    t.string "animal_type"
   end
 
   add_index "animals", ["ancestry"], :name => "index_animals_on_ancestry"
+
+
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
