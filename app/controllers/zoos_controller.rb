@@ -35,7 +35,7 @@ class ZoosController < ApplicationController
 
   def create
     @zoo = Zoo.new(params[:zoo])
-    #@zoo.user_id = session[:user_id];
+    @zoo.user_id = session[:user_id];
 
     respond_to do |format|
       if @zoo.save

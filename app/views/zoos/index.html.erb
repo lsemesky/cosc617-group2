@@ -41,9 +41,11 @@
     <td class="list_actions">
       <%= link_to 'Display', zoo %> <br/>
       <%= link_to 'View animals in zoo',zoo_animals_path(zoo.id)%><br/>
-      <%= link_to 'Edit', edit_zoo_path(zoo) %><br/>
-      <%= link_to 'Delete', zoo, method: :delete,
-                  data: { confirm: 'Are you sure?' } %>
+      <% if zoo.user_id == session[:user_id]%>
+	      <%= link_to 'Edit', edit_zoo_path(zoo) %><br/>
+	      <%= link_to 'Delete', zoo, method: :delete,
+	                  data: { confirm: 'Are you sure?' } %>
+	  <%end%>
     </td>
   </tr>
 <% end %>
