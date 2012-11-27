@@ -1,8 +1,18 @@
 <h1>Zoos#index</h1>
+
+<%= form_tag zoos_path, :method => 'get' do %>
+  <p>
+  	<%= text_field_tag :search, params[:search] %>
+  	<%= submit_tag "Search", :name => nil %>
+  </p>	
+<% end %>
+
 <table>
+<% if @zoos.empty? %>
+   No records found!
+<% else %>
 <% @zoos.each do |zoo| %>
   <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
-
 
     <td class="list_description">
       <dl>
@@ -37,9 +47,10 @@
     </td>
   </tr>
 <% end %>
+<% end %>
 </table>
-
-<br />
+<%= paginate @zoos %>
+<br/><br/>
 
 <%= link_to 'New zoo page', new_zoo_path %>
 <%= link_to 'Back', home_path %>

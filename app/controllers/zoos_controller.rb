@@ -1,14 +1,15 @@
 class ZoosController < ApplicationController
  def index
-    @zoos = Zoo.all
+    #@zoos = Zoo.all
+    @zoos = Zoo.search(params[:search]).order(:name).page(params[:page]).per(3)
 
     respond_to do |format|
       format.html 
       format.json { render json: @zoos }
     end
   end
-
-
+  
+  
   def show
     @zoo = Zoo.find(params[:id])
 
@@ -34,7 +35,7 @@ class ZoosController < ApplicationController
 
   def create
     @zoo = Zoo.new(params[:zoo])
-    @zoo.user_id = session[:user_id];
+    #@zoo.user_id = session[:user_id];
 
     respond_to do |format|
       if @zoo.save
