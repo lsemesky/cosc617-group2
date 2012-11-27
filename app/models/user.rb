@@ -15,6 +15,14 @@ class User < ActiveRecord::Base
   validates_length_of :password, :in => 6..20, :on => :create
   attr_accessor :password #this means it doesn't get saved in the database
   
+  def self.search(search)
+    if search
+      where('name LIKE ?', "%#{search}%")    
+    else
+      scoped
+    end 
+  end
+  
   
  def self.authenticate(email="", login_password="")
 

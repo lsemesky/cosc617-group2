@@ -71,4 +71,12 @@ class Animal < ActiveRecord::Base
     ).uniq - [self]
   end
 
+  def self.search(search)
+    if search
+      where('name LIKE ?', "%#{search}%")    
+    else
+      scoped
+    end 
+  end
+
 end
