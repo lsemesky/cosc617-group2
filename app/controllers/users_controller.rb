@@ -23,8 +23,12 @@ class UsersController < ApplicationController
   end
   
   def show
-    
-    @user = User.find session[:user_id] 
+    if params[:id] 
+      @user = User.find params[:id]
+    else
+      @user = User.find session[:user_id]
+    end
+     
 
     respond_to do |format|
       format.html # show.html.erb
