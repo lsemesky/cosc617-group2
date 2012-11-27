@@ -11,11 +11,12 @@ AssociationOfZoo::Application.routes.draw do
 root :to => "sessions#login"
 
 #match "animals", :to => "animals#index"
+match "search", :to => "search#index"
 match "signup", :to => "users#register"
 match "login", :to => "sessions#login"
 match "logout", :to => "sessions#logout"
 match "home", :to => "sessions#home"
-match "profile", :to => "users#edit"
+match "profile", :to => "users#show"
 match "setting", :to => "sessions#setting"
 match "tos", :to => "users#tos"
 
