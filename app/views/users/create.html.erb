@@ -1,12 +1,6 @@
+<h1>Create Your Profile, <%=@user.name%></h1>
 
 <%= form_for(@user) do |f| %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-<!-- START_HIGHLIGHT -->
-    <%= f.text_field :name %>
-<!-- END_HIGHLIGHT -->
-  </div>
   
   <div class="field">
     <%= f.label :address %><br />
@@ -55,23 +49,8 @@
 <!-- END_HIGHLIGHT -->
   </div>
   <p></p>
-  <div class="field">
-  	If you would like to change your password:
+  <div>
+    <%= f.submit "Create Profile" %>
   </div>
   
-  <div class="field">
-  	<%= f.label :new_password %><br /> 
-  	<%= f.password_field :password %><br/>
-  </div>
-  
-  <div class="field">
-  	<%= f.label :new_password_confirmation %><br /> 
-  	<%= f.password_field :password_confirmation %><br/>
-  </div>
-  <p></p>
-  <div class="actions">
-    <%= f.submit "Update Profile/Change Password" %>
-  </div>
-
 <% end %>
-<p></p>

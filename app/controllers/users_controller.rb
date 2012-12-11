@@ -23,31 +23,46 @@ class UsersController < ApplicationController
   end
   
   def show
-    if params[:id] 
+   if params[:id] 
       @user = User.find params[:id]
     else
       @user = User.find session[:user_id]
     end
-     
-
+    
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @animal }
-    
-  end
-   
-    #redirect_to profile_path
+      format.json { render json: @user }  
+    end
   end
   
     def edit
     @user = User.find session[:user_id] 
+    if request.post?
+    if params[:user][:password].empty?
+      # password not edited
+      params[:user][:password] = @user.password
+      params[:user][:password_confirmation] = @user.password
+    else
+      # password edited
+      if params[:user][:current_password] != @user.password
+        @user.errors.add(:current_password, "is incorrect")
+        return
+      end
+    end
+    if @user.update_attributes(params[:user])
+      flash[:notice] = "Your details have been updated"
+      redirect_to :action => :index
+    end
+  end
+  @user.password = nil
+  @user.password_confirmation = nil
   end
   
   def update
     @user = User.find session[:user_id] 
     
     respond_to do |format|
-      if @user.update_attributes(params[:user_id])
+      if @user.update_attributes(params[:user])
         format.html { redirect_to @user,
           notice: 'user profile was successfully updated.' }
         format.json { head :no_content }
@@ -57,7 +72,9 @@ class UsersController < ApplicationController
           status: :unprocessable_entity }
       end
     end
-    end
+  end
   
-
+  def create
+    @user = User.find session[:user_id] 
+  end
 end
