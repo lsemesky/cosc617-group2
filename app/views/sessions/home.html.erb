@@ -1,6 +1,103 @@
-<h1>Sessions#home</h1>
-<p>Find me in app/views/sessions/home</p>
-<p>Welcome <%=@current_user.name%>!</p>
+<<<<<<< HEAD
+
+<p>Welcome <%=@user.name%>!</p>
+
+<h1>Your Zoo</h1>
+<table>
+	<% if @zoo == nil %>
+	You have no zoo
+	<% else %>
+	<tr>
+		<th>Name</th>
+		<th>Address</th>
+		<th>Phone Number</th>
+		<th></th>
+	</tr>
+	
+	<tr>
+
+		<td class="list_description">
+		<dl>
+			<dt>
+				<%= @zoo.name %>
+			</dt>
+		</dl></td>
+
+		<td>
+		<dl>
+			<dt>
+				<%= @zoo.address %>
+			</dt>
+		</dl></td>
+
+		<td>
+		<dl>
+			<dt>
+				<%= @zoo.phone %>
+			</dt>
+		</dl></td>
+
+		<td class="list_actions"> <%= link_to 'Display', @zoo %>
+		<br/>
+		<%= link_to 'View animals in zoo',zoo_animals_path(@zoo.id)%>
+		<br/>
+		  <% if @zoo.user_id == session[:user_id]%>
+		      <%= link_to 'Edit', edit_zoo_path(@zoo) %><br/>
+		      <%= link_to 'Delete', @zoo, method: :delete,
+		                  data: { confirm: 'Are you sure?' } %>
+	  	<%end%>
+	</tr>
+	
+<% end %>
+</table>
+
+<br/>
+<br/>
+<h1>Your Animals</h1>
+<% if @animals.empty? %>
+No Animals found
+<% else %>
+
+<% @species.sort.each do |type, animals| %>
+<table>
+	<caption>
+		<h2><%= type %></h2>
+	</caption>
+	<tr>
+		<th>Animal ID</th>
+		<th>Animal Name</th>
+		<th>Gender</th>
+		<th>Breeding Status</th>
+		<th>Zoo</th>
+		<th></th>
+	</tr>
+
+	<% for animal in animals %>
+	<tr>
+		<td> <%= animal.id %> </td>
+		<td> <%= animal.name %> </td>
+		<td> <%= animal.gender %> </td>
+		<td> <%= animal.breeding_status %> </td>
+		<td> <%= link_to animal.zoo.name, zoo_path(animal.zoo.id)%> </td>
+		<td> <%= link_to 'Show', zoo_animal_url(animal.zoo_id, animal.id) %>
+		<br/>
+		<% if animal.zoo.user_id == session[:user_id] %>
+		<%= link_to 'Edit', edit_zoo_animal_path(animal.zoo_id, animal.id) %>
+		<br/>
+		<%= link_to 'Destroy', zoo_animal_url(animal.zoo_id, animal.id), method: :delete,
+		data: { confirm: 'Are you sure?' } %>
+		<% end %> </td>
+	</tr>
+	<% end %>
+</table>
+<br />
+<%end%>
+<% end%>
+<br/>
+<br/>
+=======
+<h1>Welcome <%=@current_user.name%>!</h1>
 <%= link_to "Create New User Profile", profile_path%><br/>
 <%= link_to 'Zoo Page', zoos_path %><br/>
+>>>>>>> 2217838b68381b1cfa6a305125c6f4bf548a130d
 
