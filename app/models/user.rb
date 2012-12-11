@@ -2,7 +2,8 @@ class User < ActiveRecord::Base
 
   attr_accessible :name, :email, :password, :password_confirmation, :tos, :address, :phone, :dob, :gender, :location, :website
   
-  
+  has_one :zoo
+  has_many :animals, :through => :zoo
   before_save :encrypt_password
   after_save :clear_password
 
@@ -22,6 +23,8 @@ class User < ActiveRecord::Base
       scoped
     end 
   end
+  
+
   
   
  def self.authenticate(email="", login_password="")

@@ -1,5 +1,5 @@
 class Animal < ActiveRecord::Base
-
+  belongs_to :user
   belongs_to :zoo
   validates :breeding_status, :gender, :dob, :animal_type, :presence => true
   attr_accessible :ancestry, :breeding_status, :comments, :dob, :gender, :name, :animal_type, :zoo_id, :mother_id, :father_id
@@ -79,4 +79,29 @@ class Animal < ActiveRecord::Base
     end 
   end
 
+  def compatible_mates
+    if !(self.gender && self.mother? && self.father?)
+      if !self.gender?
+        errors.add :base, 'Cannot determine compatible mates without animal gender'
+        
+      end
+      if !(self.mother? && self.father?)  
+        errors.add :base, 'Need both parent IDs before finding compatible mates'
+      end
+   
+    elsif self.gender == 'male'
+       Animal.where(:breeding_status => 'viable', :gender => 'female') - self.decendants - self.ancestors
+    else #self.gender == 'female'
+       Animal.where(:breeding_status => 'viable', :gender => 'male') - self.decendants - self.ancestors
+      
+    end
+  end
+  
+  def decendants
+    children.map(&:descendans).flatten - [self]
+  end
+  
+  def ancestors
+    ([mother, mother.try(:ancestors)].compact.flatten + [father, father.try(:ancestors)].compact.flatten).uniq - [self]
+  end
 end

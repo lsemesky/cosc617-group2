@@ -22,6 +22,12 @@ class SessionsController < ApplicationController
 
   def home
     #Home Page
+    @user = User.find session[:user_id]
+    @zoo = @user.zoo
+    
+    @animals = @user.animals
+    
+    @species = @animals.group_by {|animal| animal.animal_type}
   end
 
   def profile
