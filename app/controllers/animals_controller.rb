@@ -4,11 +4,19 @@ class AnimalsController < ApplicationController
     @animals = Animal.where(:zoo_id => params[:zoo_id])   #this is the index method
     @species = @animals.group_by {|animal| animal.animal_type}
     @zoo = Zoo.find(params[:zoo_id])
+    @id = params[:id]
+    if @id
+      @animal = Animal.find(@id)
+    end
+    if @animal
+   @mates = @animal.compatible_mates
+   end
 
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @animals }
+      format.js
     end
   end
 
@@ -108,5 +116,14 @@ class AnimalsController < ApplicationController
     end
   end
   
+  def mates
+    @animal = Animal.find(3)
+    @mates = Animal.find(3)#@animal#.compatible_mates
+    respond_to do |format|
+    #  format.html
+      format.js 
+    end
+
+  end
 
 end

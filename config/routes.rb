@@ -21,7 +21,9 @@ match "profile", :to => "users#create"
 match "show", :to => "users#show"
 match "setting", :to => "sessions#setting"
 match "tos", :to => "users#tos"
+match "animals/mates", :to => "animals#mates"
 
+get 'mates' => 'animals#mates', :as => 'mates'
   get "sessions/login"
 
   get "sessions/home"

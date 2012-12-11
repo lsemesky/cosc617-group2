@@ -80,25 +80,27 @@ class Animal < ActiveRecord::Base
   end
 
   def compatible_mates
-    if !(self.gender && self.mother? && self.father?)
+    if !(self.gender && self.mother && self.father)
       if !self.gender?
         errors.add :base, 'Cannot determine compatible mates without animal gender'
         
       end
-      if !(self.mother? && self.father?)  
+      if !(self.mother && self.father)  
         errors.add :base, 'Need both parent IDs before finding compatible mates'
       end
+      
+      return nil
    
     elsif self.gender == 'male'
-       Animal.where(:breeding_status => 'viable', :gender => 'female') - self.decendants - self.ancestors
+       Animal.where(:breeding_status => 'viable', :gender => 'female', :animal_type => self.animal_type) - [self.mother] - self.children - self.siblings
     else #self.gender == 'female'
-       Animal.where(:breeding_status => 'viable', :gender => 'male') - self.decendants - self.ancestors
+       Animal.where(:breeding_status => 'viable', :gender => 'male', :animal_type => self.animal_type) - [self.father] -  self.children - self.siblings
       
     end
   end
   
   def decendants
-    children.map(&:descendans).flatten - [self]
+    children.map(&:decendants).flatten - [self]
   end
   
   def ancestors

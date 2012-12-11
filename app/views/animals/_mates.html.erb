@@ -1,0 +1,51 @@
+  <% if @animal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@animal.errors.count, "error") %>
+      prevented searching for parents:</h2>
+
+      <ul>
+      <% @animal.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<% if @mates %>
+<tr>
+<td colspan = 5>
+
+<table width = "55%">
+
+
+	<tr><th colspan = 5><%=@animal.name%>'s Compatible Mates</th></tr>
+	<%if @mates.empty?%>
+	<tr><td colspan = 5>No compatible mates found</td></tr>
+	<%else%>
+<% for animal in @mates %>
+  <tr>
+	<td>
+		<%= animal.id %>
+	</td>
+    <td>
+        <%= animal.name %>
+    </td>
+        <td>
+        <%= animal.gender %>
+    </td>
+    <td>
+        <%= animal.breeding_status %>
+    </td>
+
+    <td>
+      <%= link_to 'Show', zoo_animal_url(animal.zoo_id, animal.id) %><br/>
+   
+    </td>
+  </tr>
+  <%end%>
+  <%end%>
+  </table>
+  
+</td>
+</tr>
+<%end%>

@@ -29,13 +29,21 @@
       <% if @zoo.user_id == session[:user_id] %>
      	 <%= link_to 'Edit', edit_zoo_animal_path(animal.zoo_id, animal.id) %><br/>
      	 <%= link_to 'Destroy', zoo_animal_url(animal.zoo_id, animal.id), method: :delete,
-                  data: { confirm: 'Are you sure?' } %>
-         <%= button_to 'Find compatible mates', method: :find_mates %>
+                  data: { confirm: 'Are you sure?' } %><br/>
+         <%= link_to 'Find compatible mates', {:action => :index, :id => animal.id}, remote: true%>
+         
        <% end %>
     </td>
   </tr>
+  
   <div id = 'mates'>
+  	<%if @id.to_s== animal.id.to_s%>	
+  
+  	
+  		<%=render :partial=>'mates'%>
+  	<%end%>
   </div>
+  
 <% end %>
 </table>
 
