@@ -30,9 +30,12 @@
      	 <%= link_to 'Edit', edit_zoo_animal_path(animal.zoo_id, animal.id) %><br/>
      	 <%= link_to 'Destroy', zoo_animal_url(animal.zoo_id, animal.id), method: :delete,
                   data: { confirm: 'Are you sure?' } %>
+         <%= button_to 'Find compatible mates', method: :find_mates %>
        <% end %>
     </td>
   </tr>
+  <div id = 'mates'>
+  </div>
 <% end %>
 </table>
 
