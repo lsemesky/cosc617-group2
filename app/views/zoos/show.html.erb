@@ -1,15 +1,12 @@
-<h1>Zoo Information</h1>
+<h1><%= @zoo.name %></h1> <%=link_to 'Show Animals in Zoo', zoo_animals_path(@zoo.id)%>
 
 
 <p>
-  <b>Zoo Image:</b>
-  <%= image_tag @zoo.image.url(:small) %>
+ 
+  <%= image_tag @zoo.image.url(:profile) %>
 </p>
 
-<p>
-  <b>Zoo Name:</b>
-  <%= @zoo.name %>
-</p>
+
 
 <p>
   <b>Belongs:</b>
@@ -25,6 +22,11 @@
     <b>Location Address:</b>
     <%=@zoo.address%>
   </p>
+
+<p>
+	<b>Zoo Admin User Profile</b>
+	<%=link_to @zoo.user.name, user_path(@zoo.user.id)%>
+</p>
 
   <p>
     <b>Contact Phone:</b>
@@ -42,6 +44,7 @@
   <%= @zoo.remarks%>
 </p>
 
-
+<% if @zoo.user.id == session[:user_id]%>
 <%= link_to 'Edit', edit_zoo_path(@zoo) %> |
+<%end%>
 <%= link_to 'Back', zoos_path %>

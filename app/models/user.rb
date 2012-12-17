@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  attr_accessible :name, :email, :password, :password_confirmation, :tos, :address, :phone, :dob, :gender, :location, :website, :photo
+  attr_accessible :name, :email, :password, :password_confirmation, :tos, :address, :phone, :dob, :gender, :location, :website, :photo, :admin
   
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed
@@ -12,9 +12,11 @@ class User < ActiveRecord::Base
   has_many :animals, :through => :zoo
 
   before_save :encrypt_password
+  before_create :set_admin
   after_save :clear_password
   
   EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
+  ADMIN_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.org$/i
   validates :name, :presence => true
   validates :email, :presence => true, :uniqueness => true, :format => EMAIL_REGEX
   validates :password, :confirmation => true
@@ -25,10 +27,19 @@ class User < ActiveRecord::Base
   
   def self.search(search)
     if search
-      where('name LIKE ?', "%#{search}%")    
+      where('name LIKE ? OR email LIKE ?', "%#{search}%", "%#{search}%")    
     else
       scoped
     end 
+  end
+  
+  def set_admin
+    if ADMIN_REGEX.match(email)
+      self.admin = true;
+     else
+       self.admin = false;
+    end
+    return true
   end
   
  def self.authenticate(email="", login_password="")
@@ -71,5 +82,7 @@ class User < ActiveRecord::Base
     relationships.find_by_followed_id(other_user.id).destroy
   end
   
-  has_attached_file :photo, :styles => { :small => "50x50>" }
+    has_attached_file :photo, :default_url => "default_avatar_:style.png", :styles => { :small => "50x50>", :medium => "100x100>", :profile => "300x300>"}, :default_style => :medium
+  
+  
 end

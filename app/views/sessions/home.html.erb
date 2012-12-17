@@ -1,15 +1,19 @@
 
 <p>Welcome <%=@user.name%>!</p>
-<p><%= link_to "Create Your Profile", profile_path %></p>
+<% if !@user.admin%>
+Please use the links to the left to browse zoos and animals.
+<%else%>
 <h1>Your Zoo</h1>
 <table>
-	<% if @zoo == nil %>
+	<% if @zoo == nil%>
 	You have no zoo
 	<br/>
+	
 	<%= link_to 'Create Zoo', new_zoo_path%>
+	
 	<% else %>
 	<tr>
-
+		<th></th>
 		<th>Name</th>
 		<th>Address</th>
 		<th>Phone Number</th>
@@ -18,29 +22,14 @@
 	
 	<tr>
 
+		<td><%= image_tag @zoo.image.url(:small) %></td>
+		<td ><%= link_to @zoo.name, @zoo %></td>
 
-		<td class="list_description">
-		<dl>
-			<dt>
-				<%= @zoo.name %>
-			</dt>
-		</dl></td>
+		<td><%= @zoo.address %></td>
 
-		<td>
-		<dl>
-			<dt>
-				<%= @zoo.address %>
-			</dt>
-		</dl></td>
+		<td><%= @zoo.phone %></td>
 
-		<td>
-		<dl>
-			<dt>
-				<%= @zoo.phone %>
-			</dt>
-		</dl></td>
-
-		<td class="list_actions"> <%= link_to 'Display', @zoo %>
+		<td class="list_actions"> 
 		<br/>
 		<%= link_to 'View animals in zoo',zoo_animals_path(@zoo.id)%>
 		<br/>
@@ -57,7 +46,7 @@
 <br/>
 <br/>
 <h1>Your Animals</h1>
-<% if @zoo != nil%>
+<% if @zoo != nil && @user.admin%>
 	<%= link_to 'Create animal in your zoo', new_zoo_animal_path(@zoo.id)%>
 <%end%>
 <% if @animals.empty? %>
@@ -83,12 +72,11 @@ No Animals found
 	<tr>
 		<td><%= image_tag animal.images.url(:small) %></td>
 		<td> <%= animal.id %> </td>
-		<td> <%= animal.name %> </td>
+		<td> <%= link_to animal.name, zoo_animal_url(animal.zoo_id, animal.id) %> </td>
 		<td> <%= animal.gender %> </td>
 		<td> <%= animal.breeding_status %> </td>
 		<td> <%= link_to animal.zoo.name, zoo_path(animal.zoo.id)%> </td>
-		<td> <%= link_to 'Show', zoo_animal_url(animal.zoo_id, animal.id) %>
-		<br/>
+		<td> 
 		<% if animal.zoo.user_id == session[:user_id] %>
 		<%= link_to 'Edit', edit_zoo_animal_path(animal.zoo_id, animal.id) %>
 		<br/>
@@ -101,5 +89,6 @@ No Animals found
 <br />
 <%end%>
 <% end%>
+<%end%>
 <br/>
 <br/>

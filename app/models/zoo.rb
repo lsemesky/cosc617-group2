@@ -6,11 +6,11 @@ class Zoo < ActiveRecord::Base
     
   def self.search(search)
     if search
-      where('name LIKE ?', "%#{search}%")    
+      where('name LIKE ? OR address LIKE ?', "%#{search}%", "%#{search}%")    
     else
       scoped
     end 
   end 
   
-  has_attached_file :image, :styles => { :small => "70x50>" }
+  has_attached_file :image, :styles => { :small => "70x50>", :medium =>"140x100>", :profile => "280x200>" }, :default_style => :medium, :default_url => "default_zoo.png"
 end

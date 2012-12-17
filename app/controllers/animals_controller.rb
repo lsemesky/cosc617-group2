@@ -14,6 +14,7 @@ class AnimalsController < ApplicationController
 
 
     respond_to do |format|
+
       format.html # index.html.erb
       format.json { render json: @animals }
       format.js
@@ -116,14 +117,6 @@ class AnimalsController < ApplicationController
     end
   end
   
-  def mates
-    @animal = Animal.find(3)
-    @mates = Animal.find(3)#@animal#.compatible_mates
-    respond_to do |format|
-    #  format.html
-      format.js 
-    end
 
-  end
 
 end

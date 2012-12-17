@@ -1,7 +1,7 @@
-  <% if @animal.errors.any? %>
+ <%@animal.name%> <% if @animal.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@animal.errors.count, "error") %>
-      prevented searching for parents:</h2>
+      prevented searching for <%=@animal.name%>'s mates:</h2>
 
       <ul>
       <% @animal.errors.full_messages.each do |msg| %>
@@ -12,23 +12,26 @@
   <% end %>
 
 <% if @mates %>
-<tr>
-<td colspan = 5>
+
 
 <table width = "55%">
 
 
-	<tr><th colspan = 5><%=@animal.name%>'s Compatible Mates</th></tr>
+	<tr><th colspan = 6><%=@animal.name%>'s Compatible Mates</th></tr>
 	<%if @mates.empty?%>
 	<tr><td colspan = 5>No compatible mates found</td></tr>
 	<%else%>
 <% for animal in @mates %>
   <tr>
+  	<td>
+  		<%= image_tag animal.images.url(:small) %>
+  	</td>
 	<td>
 		<%= animal.id %>
 	</td>
     <td>
-        <%= animal.name %>
+       <%=link_to animal.name, zoo_animal_path(animal.zoo_id, animal.id) %><br/>
+     
     </td>
         <td>
         <%= animal.gender %>
@@ -38,14 +41,17 @@
     </td>
 
     <td>
-      <%= link_to 'Show', zoo_animal_url(animal.zoo_id, animal.id) %><br/>
+    	<% if animal.zoo.user.id == session[:user_id]%>
+    	You are the admin for this animal
+    	<%else%>
+  <%= mail_to animal.zoo.user.email, name='Send Breeding Request Email' %>
+  <%end%>
    
     </td>
   </tr>
   <%end%>
   <%end%>
   </table>
-  
-</td>
-</tr>
+  <br/>
+
 <%end%>

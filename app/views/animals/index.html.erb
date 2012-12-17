@@ -1,4 +1,9 @@
 <h1>List of Animals</h1>
+  <div id = 'mates'>
+  	<%if @id%>	
+ 		<%=render :partial=>'mates'%>
+  	<%end%>
+  </div>
 <% @species.sort.each do |type, animals| %>
 <table>
 <caption><h1><%= type %></h1></caption>
@@ -20,7 +25,7 @@
 		<%= animal.id %>
 	</td>
     <td>
-        <%= animal.name %>
+        <%= link_to animal.name, zoo_animal_url(animal.zoo_id, animal.id) %>
     </td>
         <td>
         <%= animal.gender %>
@@ -30,24 +35,20 @@
     </td>
 
     <td>
-      <%= link_to 'Show', zoo_animal_url(animal.zoo_id, animal.id) %><br/>
+      
       <% if @zoo.user_id == session[:user_id] %>
      	 <%= link_to 'Edit', edit_zoo_animal_path(animal.zoo_id, animal.id) %><br/>
      	 <%= link_to 'Destroy', zoo_animal_url(animal.zoo_id, animal.id), method: :delete,
                   data: { confirm: 'Are you sure?' } %><br/>
+         <% if animal.breeding_status == "viable"%>
          <%= link_to 'Find compatible mates', {:action => :index, :id => animal.id}, remote: true%>
+         <%end%>
          
        <% end %>
     </td>
   </tr>
   
-  <div id = 'mates'>
-  	<%if @id.to_s== animal.id.to_s%>	
-  
-  	
-  		<%=render :partial=>'mates'%>
-  	<%end%>
-  </div>
+
   
 <% end %>
 </table>

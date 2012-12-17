@@ -10,10 +10,10 @@ class Animal < ActiveRecord::Base
    belongs_to :mother, :class_name => "Animal"
 
  before_save :set_parents
- validate :correct_parent_gender, :parents_share_species
+ validate :correct_parent_gender, :parents_share_species, :parents_born_earlier
  
  def correct_parent_gender()
-   unless mother_id.blank?
+   unless mother_id.blank? 
      if mother.gender == 'male'
        errors.add :base, 'trying to assign male animal to mother'
      end
@@ -24,6 +24,24 @@ class Animal < ActiveRecord::Base
        errors.add :base, 'trying to assign female animal to father'
      end
    end  
+ end
+ 
+ def parents_born_earlier()
+   unless self.dob.blank?
+     unless mother_id.blank?
+        new_mother = Animal.find(mother_id)
+        if new_mother.dob >= self.dob
+          errors.add :base, 'mother must be born earlier than child'
+        end
+     end
+     
+     unless father_id.blank?
+       new_father = Animal.find(father_id)
+       if new_father.dob >= self.dob
+          errors.add :base, 'father must be born earlier than child'
+       end
+     end   
+   end
  end
  
  def parents_share_species()
@@ -73,11 +91,13 @@ class Animal < ActiveRecord::Base
 
   def self.search(search)
     if search
-      where('name LIKE ?', "%#{search}%")    
+      where('name LIKE ? OR animal_type like ?', "%#{search}%", "%#{search}%")    
     else
       scoped
     end 
   end
+  
+
 
   def compatible_mates
     if !(self.gender && self.mother && self.father)
@@ -88,7 +108,6 @@ class Animal < ActiveRecord::Base
       if !(self.mother && self.father)  
         errors.add :base, 'Need both parent IDs before finding compatible mates'
       end
-      image
       return nil
    
     elsif self.gender == 'male'
@@ -107,5 +126,12 @@ class Animal < ActiveRecord::Base
     ([mother, mother.try(:ancestors)].compact.flatten + [father, father.try(:ancestors)].compact.flatten).uniq - [self]
   end
   
-  has_attached_file :images, :styles => { :small => "50x50>" }
+  has_attached_file :images, :default_url => :default_url_by_animal_type, :styles => { :small => "50x50>", :medium => "100x100>", :profile => "300x300>"}, :default_style => :medium
+  
+  private
+  
+  def default_url_by_animal_type
+    "default_#{animal_type}_:style.png"
+  end
+
 end

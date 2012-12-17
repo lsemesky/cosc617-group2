@@ -23,4 +23,13 @@ class ApplicationController < ActionController::Base
       return true
     end
   end
+  
+  def is_admin
+    if session[:user_id].admin
+        return true
+    else
+      redirect_to(:controller => 'sessions', :action => 'home')
+      return false
+    end
+  end
 end

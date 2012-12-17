@@ -1,4 +1,4 @@
-<h1>Zoos#index</h1>
+<h1>Zoo Listing</h1>
 
 <%= form_tag zoos_path, :method => 'get' do %>
   <p>
@@ -22,14 +22,8 @@
 
     <td class="list_description">
       <dl>
-        <dt><%= zoo.name %></dt>
+        <dt><%= link_to zoo.name, zoo %></dt>
       </dl>
-    </td>
-    
-    <td>
-    	<dl>
-    		<dt><%= zoo.belongs %></dt>
-    	</dl>
     </td>
     
     <td>
@@ -45,7 +39,7 @@
     </td>
 
     <td class="list_actions">
-      <%= link_to 'Display', zoo %> <br/>
+       <br/>
       <%= link_to 'View animals in zoo',zoo_animals_path(zoo.id)%><br/>
       <% if zoo.user_id == session[:user_id]%>
 	      <%= link_to 'Edit', edit_zoo_path(zoo) %><br/>
@@ -57,8 +51,9 @@
 <% end %>
 <% end %>
 </table>
-<%= paginate @zoos %>
+<%= will_paginate @zoos %>
 <br/><br/>
-
+<% if @current_user.admin && @current_user.zoo == nil%>
 <%= link_to 'New zoo page', new_zoo_path %>
+<%end%>
 <%= link_to 'Back', home_path %>
