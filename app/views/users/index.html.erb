@@ -1,0 +1,22 @@
+<h1>List of Registered Users</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+    <td><%= link_to user.name, user_path(user.id) %></td>
+    <td><%= user.email %></td>
+    <td><%= link_to 'Change Profile', edit_path(user) %></td>
+    <td><%= button_to 'unfollow', 'users/unfollow' %></td>
+    <td><%= button_to 'follow', 'users/follow' %></td> 
+  </tr> 
+<% end %>
+</table>
+<%= will_paginate %>
+  

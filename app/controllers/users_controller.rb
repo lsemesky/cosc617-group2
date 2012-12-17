@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
   
   before_filter :save_login_state, :only => [:register, :add]
-
+  #before_filter :signed_in_user, only: [:edit, :update]
+  #before_filter :correct_user,   only: [:edit, :update]
+  
   def register
     @user = User.new(params[:user])
   end
@@ -35,7 +37,7 @@ class UsersController < ApplicationController
     end
   end
   
-    def edit
+  def edit
     @user = User.find session[:user_id] 
     if request.post?
     if params[:user][:password].empty?
@@ -63,8 +65,7 @@ class UsersController < ApplicationController
     
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to @user,
-          notice: 'user profile was successfully updated.' }
+        format.html { redirect_to @user }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -76,5 +77,41 @@ class UsersController < ApplicationController
   
   def create
     @user = User.find session[:user_id] 
+  end
+  
+  def index
+    @users = User.paginate(:per_page => 3, :page => params[:page])
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @users }
+    end
+  end
+  
+  def follow
+    @users = User.all
+  end
+  
+  def unfollow
+    @users = User.all
+  end
+  
+  def correct_user
+      @user = User.find(params[:id])
+      redirect_to(root_path) unless current_user?(@user)
+    end
+    
+  def following
+    @title = "Following"
+    @user = User.find(params[:id])
+    @users = @user.followed_users.paginate(page: params[:page])
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "Followers"
+    @user = User.find(params[:id])
+    @users = @user.followers.paginate(page: params[:page])
+    render 'show_follow'
   end
 end

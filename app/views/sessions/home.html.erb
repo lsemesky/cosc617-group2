@@ -1,6 +1,6 @@
 
 <p>Welcome <%=@user.name%>!</p>
-
+<p><%= link_to "Create Your Profile", profile_path %></p>
 <h1>Your Zoo</h1>
 <table>
 	<% if @zoo == nil %>

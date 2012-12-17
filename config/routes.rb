@@ -1,7 +1,13 @@
 AssociationOfZoo::Application.routes.draw do
-
+  resources :users
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
+  resources :relationships, only: [:create, :destroy]
+  resources :friendships
   resources :animals
-  resources :users#, :has_one => :profile, :controller => 'user'
   resources :zoos
   
   resources :zoos do
@@ -19,32 +25,22 @@ match "home", :to => "sessions#home"
 match "show", :to => "users#show"
 match "profile", :to => "users#create"
 match "show", :to => "users#show"
+match "edit", :to => "users#edit"
 match "setting", :to => "sessions#setting"
 match "tos", :to => "users#tos"
 match "animals/mates", :to => "animals#mates"
+match 'userslist', :to => "users#index"
 
-get 'mates' => 'animals#mates', :as => 'mates'
-  get "sessions/login"
-
-  get "sessions/home"
-  
-  post "sessions/home"
-
-  get "sessions/profile"
-
-  get "sessions/setting"
-  
-  get "sessions/new"
-  
-  get "sessions/edit"
+  get 'mates' => 'animals#mates', :as => 'mates'
   
   post "sessions/login_attempt"
-
   get "users/register"
-
+  post "users/unfollow"
+  post "users/follow"
   get "users/add"
-  
   post "users/add"
+  get "users/follow"
+  get "users/unfollow"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

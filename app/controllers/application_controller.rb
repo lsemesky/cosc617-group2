@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
+  helper :all 
   protect_from_forgery
+  
   protected
   def authenticate_user
     unless session[:user_id] #if user isn't signed in

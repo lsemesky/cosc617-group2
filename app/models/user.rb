@@ -2,11 +2,18 @@ class User < ActiveRecord::Base
 
   attr_accessible :name, :email, :password, :password_confirmation, :tos, :address, :phone, :dob, :gender, :location, :website
   
+  has_many :relationships, foreign_key: "follower_id", dependent: :destroy
+  has_many :followed_users, through: :relationships, source: :followed
+  has_many :reverse_relationships, foreign_key: "followed_id",
+                                   class_name:  "Relationship",
+                                   dependent:   :destroy
+  has_many :followers, through: :reverse_relationships, source: :follower
   has_one :zoo
   has_many :animals, :through => :zoo
+
   before_save :encrypt_password
   after_save :clear_password
-
+  
   EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
   validates :name, :presence => true
   validates :email, :presence => true, :uniqueness => true, :format => EMAIL_REGEX
@@ -23,9 +30,6 @@ class User < ActiveRecord::Base
       scoped
     end 
   end
-  
-
-  
   
  def self.authenticate(email="", login_password="")
 
@@ -44,7 +48,6 @@ class User < ActiveRecord::Base
     password_hash == BCrypt::Engine.hash_secret(login_password, password_salt)
   end
 
-  
  def encrypt_password
     unless password.blank?
       self.password_salt = BCrypt::Engine.generate_salt
@@ -54,5 +57,17 @@ class User < ActiveRecord::Base
   
   def clear_password
     self.password = nil
+  end
+  
+  def following?(other_user)
+    relationships.find_by_followed_id(other_user.id)
+  end
+
+  def follow!(other_user)
+    relationships.create!(followed_id: other_user.id)
+  end
+
+  def unfollow!(other_user)
+    relationships.find_by_followed_id(other_user.id).destroy
   end
 end
