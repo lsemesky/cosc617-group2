@@ -12,5 +12,5 @@ class Zoo < ActiveRecord::Base
     end 
   end 
   
-  has_attached_file :image, :styles => { :small => "70x50>" },
+  has_attached_file :image, :styles => { :small => "70x50>" }
 end

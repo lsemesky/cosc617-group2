@@ -10,8 +10,9 @@ Zoo.delete_all
 Animal.delete_all
 
 
-User.create([{name: 'a', email: 'a@a.com', password: 'aaaaaa'},
-  {name: 'b', email: 'b@b.org', password: 'bbbbbb'}])
+User.create([{name: 'Amanda', email: 'a@a.com', password: 'aaaaaa'},
+  {name: 'Barry', email: 'b@b.org', password: 'bbbbbb'},
+  {name: 'Carrol', email: 'c@c.org', password: 'cccccc'}])
 Zoo.create([
   {address: '1876 Mansion House Drive, Baltimore, MD 21217', email: 'admin@marylandzoo.org', name: 'The Maryland Zoo in Baltimore', phone: '443-552-5296', ed: '1984-01-01', belongs: 'Region-owned', remarks: '', user_id: 1},
   {address: '2920 Zoo Drive, San Diego, CA 92101', email: 'admin@sandiegozoo.org', name: 'The San Diego Zoo', phone: '619-231-1515', ed: '1964-09-23', belongs: 'Region-owned', remarks: '', user_id: 2},

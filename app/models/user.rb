@@ -71,5 +71,5 @@ class User < ActiveRecord::Base
     relationships.find_by_followed_id(other_user.id).destroy
   end
   
-  has_attached_file :photo, :styles => { :small => "50x50>" },
+  has_attached_file :photo, :styles => { :small => "50x50>" }
 end

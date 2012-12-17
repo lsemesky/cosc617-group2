@@ -107,5 +107,5 @@ class Animal < ActiveRecord::Base
     ([mother, mother.try(:ancestors)].compact.flatten + [father, father.try(:ancestors)].compact.flatten).uniq - [self]
   end
   
-  has_attached_file :images, :styles => { :small => "50x50>" },
+  has_attached_file :images, :styles => { :small => "50x50>" }
 end
