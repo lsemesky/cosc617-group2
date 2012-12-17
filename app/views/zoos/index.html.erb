@@ -13,6 +13,12 @@
 <% else %>
 <% @zoos.each do |zoo| %>
   <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+  	
+  	<td>
+    	<dl>
+    		<%= image_tag zoo.image.url(:small) %>
+    	</dl>
+    </td>
 
     <td class="list_description">
       <dl>

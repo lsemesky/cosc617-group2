@@ -9,6 +9,7 @@
 	<%= link_to 'Create Zoo', new_zoo_path%>
 	<% else %>
 	<tr>
+
 		<th>Name</th>
 		<th>Address</th>
 		<th>Phone Number</th>
@@ -16,6 +17,7 @@
 	</tr>
 	
 	<tr>
+
 
 		<td class="list_description">
 		<dl>
@@ -68,6 +70,7 @@ No Animals found
 		<h2><%= type %></h2>
 	</caption>
 	<tr>
+		<th>Animal Picture</th>
 		<th>Animal ID</th>
 		<th>Animal Name</th>
 		<th>Gender</th>
@@ -78,6 +81,7 @@ No Animals found
 
 	<% for animal in animals %>
 	<tr>
+		<td><%= image_tag animal.images.url(:small) %></td>
 		<td> <%= animal.id %> </td>
 		<td> <%= animal.name %> </td>
 		<td> <%= animal.gender %> </td>

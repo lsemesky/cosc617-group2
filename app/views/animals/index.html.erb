@@ -2,7 +2,8 @@
 <% @species.sort.each do |type, animals| %>
 <table>
 <caption><h1><%= type %></h1></caption>
-<tr><th>Animal ID</th>
+<tr><th>Animal Picture</th>
+	<th>Animal ID</th>
 	<th>Animal Name</th>
 	<th>Gender</th>
 	<th>Breeding Status</th>
@@ -10,7 +11,11 @@
 </tr>
 
 <% for animal in animals %>
-  <tr>
+
+  <tr>	
+  	<td>
+    	<%= image_tag animal.images.url(:small) %>
+    </td>
 	<td>
 		<%= animal.id %>
 	</td>

@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  attr_accessible :name, :email, :password, :password_confirmation, :tos, :address, :phone, :dob, :gender, :location, :website
+  attr_accessible :name, :email, :password, :password_confirmation, :tos, :address, :phone, :dob, :gender, :location, :website, :photo
   
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed
@@ -70,4 +70,6 @@ class User < ActiveRecord::Base
   def unfollow!(other_user)
     relationships.find_by_followed_id(other_user.id).destroy
   end
+  
+  has_attached_file :photo, :styles => { :small => "50x50>" },
 end

@@ -1,6 +1,11 @@
 <h1>Animal Profile</h1>
 
 <p>
+  <b>Zoo Image:</b>
+  <%= image_tag @animal.images.url(:small) %>
+</p>
+
+<p>
   <b>Species:</b>
   <%= @animal.animal_type %>
 </p>

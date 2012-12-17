@@ -1,5 +1,5 @@
 
-<%= form_for(@user) do |f| %>
+<%= form_for @user, :html => { :multipart => true } do |f| %>
 
   <div class="field">
     <%= f.label :name %><br />
@@ -69,10 +69,11 @@
   	<%= f.password_field :password_confirmation %><br/>
   </div>
   
-  <div><%= gravatar_for @user %>
-  <a href="http://gravatar.com/emails">change</a>
+  <div>   
+  	<%= f.label :photo %><br />
+  	<%= f.file_field :photo %>
   </div>
-  <p></p>
+
   <div class="actions">
     <%= f.submit "Update Profile/Change Password" %>
   </div>

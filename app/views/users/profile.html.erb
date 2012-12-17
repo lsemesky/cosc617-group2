@@ -2,10 +2,10 @@
 <div class="row">
   <aside class="span4">
     <section>
-      <h1>
-        <%= gravatar_for @user %>
-        <%= @user.name %>
-      </h1>
+ <p>
+  <b>User Picture:</b>
+  <%= image_tag @user.photo.url(:small) %>
+</p>
     </section>
   </aside>
  <p>Username: <%=h @user.username %></p>

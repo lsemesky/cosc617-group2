@@ -2,7 +2,7 @@ class Animal < ActiveRecord::Base
   belongs_to :user
   belongs_to :zoo
   validates :breeding_status, :gender, :dob, :animal_type, :presence => true
-  attr_accessible :ancestry, :breeding_status, :comments, :dob, :gender, :name, :animal_type, :zoo_id, :mother_id, :father_id
+  attr_accessible :ancestry, :breeding_status, :comments, :dob, :gender, :name, :animal_type, :zoo_id, :mother_id, :father_id, :images
 
   has_many :fathered_children, :class_name => "Animal", :foreign_key => :father_id
   has_many :mothered_children, :class_name => "Animal", :foreign_key => :mother_id
@@ -88,7 +88,7 @@ class Animal < ActiveRecord::Base
       if !(self.mother && self.father)  
         errors.add :base, 'Need both parent IDs before finding compatible mates'
       end
-      
+      image
       return nil
    
     elsif self.gender == 'male'
@@ -106,4 +106,6 @@ class Animal < ActiveRecord::Base
   def ancestors
     ([mother, mother.try(:ancestors)].compact.flatten + [father, father.try(:ancestors)].compact.flatten).uniq - [self]
   end
+  
+  has_attached_file :images, :styles => { :small => "50x50>" },
 end

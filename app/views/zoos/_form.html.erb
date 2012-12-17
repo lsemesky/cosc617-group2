@@ -1,4 +1,4 @@
-<%= form_for(@zoo) do |f| %>
+<%= form_for @zoo, :html => { :multipart => true } do |f| %>
 
   <% if @zoo.errors.any? %>
     <div id="error_explanation">
@@ -52,7 +52,11 @@
     <%= f.text_area :remarks, :rows => 5 %>
   </div>
 
-  
+  <div>   
+  	<%= f.label :image %><br />
+  	<%= f.file_field :image %>
+  </div>
+  	
   <div class="actions">
     <%= f.submit %>
   </div>

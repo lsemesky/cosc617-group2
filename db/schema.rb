@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121216202523) do
+ActiveRecord::Schema.define(:version => 20121217040539) do
 
   create_table "animals", :force => true do |t|
     t.integer  "zoo_id"
@@ -21,11 +21,15 @@ ActiveRecord::Schema.define(:version => 20121216202523) do
     t.date     "dob"
     t.string   "ancestry"
     t.text     "comments"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.integer  "mother_id"
     t.integer  "father_id"
     t.string   "animal_type"
+    t.string   "images_file_name"
+    t.string   "images_content_type"
+    t.integer  "images_file_size"
+    t.datetime "images_updated_at"
   end
 
   add_index "animals", ["ancestry"], :name => "index_animals_on_ancestry"
@@ -63,8 +67,8 @@ ActiveRecord::Schema.define(:version => 20121216202523) do
     t.string   "email"
     t.string   "password_hash"
     t.string   "password_salt"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.string   "address"
     t.string   "phone"
     t.date     "dob"
@@ -72,6 +76,10 @@ ActiveRecord::Schema.define(:version => 20121216202523) do
     t.string   "location"
     t.string   "website"
     t.string   "remember_token"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
@@ -85,8 +93,12 @@ ActiveRecord::Schema.define(:version => 20121216202523) do
     t.string   "belongs"
     t.date     "ed"
     t.text     "remarks"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
 end
