@@ -14,6 +14,7 @@
 
 body
 {
+  height: 100%;
 	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
 	font-size: 14px;
 	background: #fff;
@@ -68,18 +69,22 @@ tbody tr:hover td
 }
 
 #columns {
-  
+      height: 100%;
+    min-height: 100%;
 
   #main {
-    margin-left: 17em;
+    margin-left: 21em;
     padding: 1em;
-    background: white;
+    background: white;    height: 100%;
+    min-height: 100%;
   }
 
   #side {
     float: left;
     padding: 1em 2em;
-    width: 13em;
+    width: 16em;
+    height: 100%;
+    min-height: 100%;
     background: #406577;
 
     ul {
