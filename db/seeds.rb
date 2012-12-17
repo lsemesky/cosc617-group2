@@ -10,7 +10,7 @@ Zoo.delete_all
 Animal.delete_all
 
 
-User.create([{name: 'Amanda', email: 'a@a.com', password: 'aaaaaa'},
+User.create([{name: 'Amanda', email: 'a@a.org', password: 'aaaaaa'},
   {name: 'Barry', email: 'b@b.org', password: 'bbbbbb'},
   {name: 'Carrol', email: 'c@c.org', password: 'cccccc'}])
 Zoo.create([
